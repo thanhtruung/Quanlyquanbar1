@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 
 namespace Quanlyquanbar
 {
+    [DebuggerDisplay("{"+nameof(GetDebuggerDisplay)+"(),nq}")]
     public partial class Form1 : Form
     {
         public Form1()
@@ -14,6 +16,8 @@ namespace Quanlyquanbar
         private void Form1_Load(object sender, EventArgs e)
         {
             // Chỉ tạo cột nếu chưa có (tránh tạo trùng khi thiết kế lại)
+
+
             if (dgvDoUong.Columns.Count == 0)
             {
                 dgvDoUong.Columns.Add("TenDoUong", "Tên đồ uống");
@@ -34,6 +38,9 @@ namespace Quanlyquanbar
                 dgvKhach.Columns.Add("SDT", "Số điện thoại");
                 dgvKhach.Columns.Add("GhiChu", "Ghi chú");
             }
+
+            dgvKhach.Rows.Add("Lê Minh C", "0909123456", "Khách quen");
+            dgvKhach.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Dữ liệu mẫu
             dgvDoUong.Rows.Add("Bia Heineken", "Bia", 30000);
@@ -59,11 +66,12 @@ namespace Quanlyquanbar
                 return;
             }
 
-            if (!decimal.TryParse(txtGiaDU.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal gia))
+            if (!decimal.TryParse(txtGiaDU.Text, NumberStyles.Any, new CultureInfo("vi-VN"), out decimal gia))
             {
                 MessageBox.Show("Đơn giá phải là số hợp lệ.", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
 
             dgvDoUong.Rows.Add(txtTenDU.Text.Trim(), cboLoaiDU.Text.Trim(), gia);
             ClearDoUongInputs();
@@ -86,11 +94,12 @@ namespace Quanlyquanbar
                 return;
             }
 
-            if (!decimal.TryParse(txtGiaDU.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal gia))
+            if (!decimal.TryParse(txtGiaDU.Text, NumberStyles.Any, new CultureInfo("vi-VN"), out decimal gia))
             {
                 MessageBox.Show("Đơn giá phải là số hợp lệ.", "Lỗi định dạng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
 
             dgvDoUong.CurrentRow.Cells[0].Value = txtTenDU.Text.Trim();
             dgvDoUong.CurrentRow.Cells[1].Value = cboLoaiDU.Text.Trim();
@@ -117,64 +126,131 @@ namespace Quanlyquanbar
                 string.IsNullOrWhiteSpace(txtChucVu.Text) ||
                 string.IsNullOrWhiteSpace(txtLuong.Text))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin nhân viên.");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin nhân viên.", "Thiếu thông tin",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!decimal.TryParse(txtLuong.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal luong))
+            if (!decimal.TryParse(txtLuong.Text, NumberStyles.Any, new CultureInfo("vi-VN"), out decimal luong))
             {
-                MessageBox.Show("Lương phải là số hợp lệ.");
+                MessageBox.Show("Lương phải là số hợp lệ.", "Lỗi định dạng",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             dgvNhanVien.Rows.Add(txtTenNV.Text.Trim(), txtChucVu.Text.Trim(), luong);
-            txtTenNV.Clear(); txtChucVu.Clear(); txtLuong.Clear();
-        }
-
-        private void btnXoaNV_Click(object sender, EventArgs e)
-        {
-            if (dgvNhanVien.CurrentRow != null) dgvNhanVien.Rows.RemoveAt(dgvNhanVien.CurrentRow.Index);
-            else MessageBox.Show("Vui lòng chọn dòng cần xóa.");
+            ClearNhanVienInputs();
         }
 
         private void btnSuaNV_Click(object sender, EventArgs e)
         {
-            if (dgvNhanVien.CurrentRow == null) { MessageBox.Show("Vui lòng chọn dòng để sửa."); return; }
-            if (!decimal.TryParse(txtLuong.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal luong)) { MessageBox.Show("Lương phải là số."); return; }
+            if (dgvNhanVien.CurrentRow == null)
+            {
+                MessageBox.Show("Vui lòng chọn 1 dòng để sửa.", "Chưa chọn dòng",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!decimal.TryParse(txtLuong.Text, NumberStyles.Any, new CultureInfo("vi-VN"), out decimal luong))
+            {
+                MessageBox.Show("Lương phải là số hợp lệ.", "Lỗi định dạng",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             dgvNhanVien.CurrentRow.Cells[0].Value = txtTenNV.Text.Trim();
             dgvNhanVien.CurrentRow.Cells[1].Value = txtChucVu.Text.Trim();
             dgvNhanVien.CurrentRow.Cells[2].Value = luong;
-            txtTenNV.Clear(); txtChucVu.Clear(); txtLuong.Clear();
+            ClearNhanVienInputs();
         }
+
+        private void btnXoaNV_Click(object sender, EventArgs e)
+        {
+            if (dgvNhanVien.CurrentRow != null)
+            {
+                dgvNhanVien.Rows.RemoveAt(dgvNhanVien.CurrentRow.Index);
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn dòng cần xóa.", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnLamMoiNV_Click(object sender, EventArgs e)
+        {
+            ClearNhanVienInputs();
+        }
+
+        private void ClearNhanVienInputs()
+        {
+            txtTenNV.Clear();
+            txtChucVu.Clear();
+            txtLuong.Clear();
+        }
+
 
         // ==== KHÁCH HÀNG ====
         private void btnThemKH_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtTenKH.Text) || string.IsNullOrWhiteSpace(txtSDT.Text))
             {
-                MessageBox.Show("Vui lòng nhập tên và số điện thoại khách hàng.");
+                MessageBox.Show("Vui lòng nhập tên và số điện thoại khách hàng.",
+                    "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // Thêm dòng mới vào DataGridView
             dgvKhach.Rows.Add(txtTenKH.Text.Trim(), txtSDT.Text.Trim(), txtGhiChu.Text.Trim());
-            txtTenKH.Clear(); txtSDT.Clear(); txtGhiChu.Clear();
-        }
-
-        private void btnXoaKH_Click(object sender, EventArgs e)
-        {
-            if (dgvKhach.CurrentRow != null) dgvKhach.Rows.RemoveAt(dgvKhach.CurrentRow.Index);
-            else MessageBox.Show("Vui lòng chọn dòng cần xóa.");
+            ClearKhachInputs();
         }
 
         private void btnSuaKH_Click(object sender, EventArgs e)
         {
-            if (dgvKhach.CurrentRow == null) { MessageBox.Show("Vui lòng chọn dòng để sửa."); return; }
+            if (dgvKhach.CurrentRow == null)
+            {
+                MessageBox.Show("Vui lòng chọn 1 dòng để sửa.",
+                    "Chưa chọn dòng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            // Cập nhật dòng được chọn
             dgvKhach.CurrentRow.Cells[0].Value = txtTenKH.Text.Trim();
             dgvKhach.CurrentRow.Cells[1].Value = txtSDT.Text.Trim();
             dgvKhach.CurrentRow.Cells[2].Value = txtGhiChu.Text.Trim();
-            txtTenKH.Clear(); txtSDT.Clear(); txtGhiChu.Clear();
+            ClearKhachInputs();
+        }
+
+        private void btnXoaKH_Click(object sender, EventArgs e)
+        {
+            if (dgvKhach.CurrentRow != null)
+            {
+                dgvKhach.Rows.RemoveAt(dgvKhach.CurrentRow.Index);
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn dòng cần xóa.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnLamMoiKH_Click(object sender, EventArgs e)
+        {
+            ClearKhachInputs();
+        }
+
+        private void ClearKhachInputs()
+        {
+            txtTenKH.Clear();
+            txtSDT.Clear();
+            txtGhiChu.Clear();
+        }
+
+        private static object GetDebuggerDisplay()
+        {
+            throw new NotImplementedException();
         }
     }
 }
+
+
