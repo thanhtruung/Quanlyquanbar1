@@ -72,25 +72,15 @@ namespace Quanlyquanbar
                 return;
             }
 
-
-            dgvDoUong.Rows.Add(txtTenDU.Text.Trim(), cboLoaiDU.Text.Trim(), gia);
+            dgvDoUong.Rows.Add(txtTenDU.Text.Trim(), cboLoaiDU.Text.Trim(), gia.ToString("N0"));
             ClearDoUongInputs();
-        }
-
-        private void btnXoaDU_Click(object sender, EventArgs e)
-        {
-            if (dgvDoUong.CurrentRow != null)
-            {
-                dgvDoUong.Rows.RemoveAt(dgvDoUong.CurrentRow.Index);
-            }
-            else MessageBox.Show("Vui lòng chọn 1 dòng để xóa.");
         }
 
         private void btnSuaDU_Click(object sender, EventArgs e)
         {
             if (dgvDoUong.CurrentRow == null)
             {
-                MessageBox.Show("Vui lòng chọn 1 dòng để sửa.");
+                MessageBox.Show("Vui lòng chọn dòng cần sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -100,11 +90,20 @@ namespace Quanlyquanbar
                 return;
             }
 
-
             dgvDoUong.CurrentRow.Cells[0].Value = txtTenDU.Text.Trim();
             dgvDoUong.CurrentRow.Cells[1].Value = cboLoaiDU.Text.Trim();
-            dgvDoUong.CurrentRow.Cells[2].Value = gia;
+            dgvDoUong.CurrentRow.Cells[2].Value = gia.ToString("N0");
             ClearDoUongInputs();
+        }
+
+        private void btnXoaDU_Click(object sender, EventArgs e)
+        {
+            if (dgvDoUong.CurrentRow != null)
+            {
+                dgvDoUong.Rows.RemoveAt(dgvDoUong.CurrentRow.Index);
+                ClearDoUongInputs();
+            }
+            else MessageBox.Show("Vui lòng chọn dòng để xóa.");
         }
 
         private void btnLamMoiDU_Click(object sender, EventArgs e)
@@ -126,19 +125,17 @@ namespace Quanlyquanbar
                 string.IsNullOrWhiteSpace(txtChucVu.Text) ||
                 string.IsNullOrWhiteSpace(txtLuong.Text))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin nhân viên.", "Thiếu thông tin",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin nhân viên.");
                 return;
             }
 
             if (!decimal.TryParse(txtLuong.Text, NumberStyles.Any, new CultureInfo("vi-VN"), out decimal luong))
             {
-                MessageBox.Show("Lương phải là số hợp lệ.", "Lỗi định dạng",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lương phải là số hợp lệ.");
                 return;
             }
 
-            dgvNhanVien.Rows.Add(txtTenNV.Text.Trim(), txtChucVu.Text.Trim(), luong);
+            dgvNhanVien.Rows.Add(txtTenNV.Text.Trim(), txtChucVu.Text.Trim(), luong.ToString("N0"));
             ClearNhanVienInputs();
         }
 
@@ -146,21 +143,19 @@ namespace Quanlyquanbar
         {
             if (dgvNhanVien.CurrentRow == null)
             {
-                MessageBox.Show("Vui lòng chọn 1 dòng để sửa.", "Chưa chọn dòng",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn dòng cần sửa.");
                 return;
             }
 
             if (!decimal.TryParse(txtLuong.Text, NumberStyles.Any, new CultureInfo("vi-VN"), out decimal luong))
             {
-                MessageBox.Show("Lương phải là số hợp lệ.", "Lỗi định dạng",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lương phải là số hợp lệ.");
                 return;
             }
 
             dgvNhanVien.CurrentRow.Cells[0].Value = txtTenNV.Text.Trim();
             dgvNhanVien.CurrentRow.Cells[1].Value = txtChucVu.Text.Trim();
-            dgvNhanVien.CurrentRow.Cells[2].Value = luong;
+            dgvNhanVien.CurrentRow.Cells[2].Value = luong.ToString("N0");
             ClearNhanVienInputs();
         }
 
@@ -169,12 +164,9 @@ namespace Quanlyquanbar
             if (dgvNhanVien.CurrentRow != null)
             {
                 dgvNhanVien.Rows.RemoveAt(dgvNhanVien.CurrentRow.Index);
+                ClearNhanVienInputs();
             }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn dòng cần xóa.", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            else MessageBox.Show("Vui lòng chọn dòng cần xóa.");
         }
 
         private void btnLamMoiNV_Click(object sender, EventArgs e)
@@ -190,17 +182,16 @@ namespace Quanlyquanbar
         }
 
 
+
         // ==== KHÁCH HÀNG ====
         private void btnThemKH_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtTenKH.Text) || string.IsNullOrWhiteSpace(txtSDT.Text))
             {
-                MessageBox.Show("Vui lòng nhập tên và số điện thoại khách hàng.",
-                    "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập tên và số điện thoại khách hàng.");
                 return;
             }
 
-            // Thêm dòng mới vào DataGridView
             dgvKhach.Rows.Add(txtTenKH.Text.Trim(), txtSDT.Text.Trim(), txtGhiChu.Text.Trim());
             ClearKhachInputs();
         }
@@ -209,12 +200,10 @@ namespace Quanlyquanbar
         {
             if (dgvKhach.CurrentRow == null)
             {
-                MessageBox.Show("Vui lòng chọn 1 dòng để sửa.",
-                    "Chưa chọn dòng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn dòng cần sửa.");
                 return;
             }
 
-            // Cập nhật dòng được chọn
             dgvKhach.CurrentRow.Cells[0].Value = txtTenKH.Text.Trim();
             dgvKhach.CurrentRow.Cells[1].Value = txtSDT.Text.Trim();
             dgvKhach.CurrentRow.Cells[2].Value = txtGhiChu.Text.Trim();
@@ -226,12 +215,9 @@ namespace Quanlyquanbar
             if (dgvKhach.CurrentRow != null)
             {
                 dgvKhach.Rows.RemoveAt(dgvKhach.CurrentRow.Index);
+                ClearKhachInputs();
             }
-            else
-            {
-                MessageBox.Show("Vui lòng chọn dòng cần xóa.",
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            else MessageBox.Show("Vui lòng chọn dòng để xóa.");
         }
 
         private void btnLamMoiKH_Click(object sender, EventArgs e)
@@ -253,4 +239,5 @@ namespace Quanlyquanbar
     }
 }
 
+        
 
