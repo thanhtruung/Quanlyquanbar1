@@ -71,13 +71,14 @@ namespace Quanlyquanbar
             // lblTieuDe
             // 
             this.lblTieuDe.AutoSize = true;
-            this.lblTieuDe.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
+            this.lblTieuDe.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTieuDe.ForeColor = System.Drawing.Color.RoyalBlue;
             this.lblTieuDe.Location = new System.Drawing.Point(250, 10);
             this.lblTieuDe.Name = "lblTieuDe";
-            this.lblTieuDe.Size = new System.Drawing.Size(251, 32);
+            this.lblTieuDe.Size = new System.Drawing.Size(222, 30);
             this.lblTieuDe.TabIndex = 0;
             this.lblTieuDe.Text = "QUẢN LÝ QUÁN BAR";
+            this.lblTieuDe.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabControl1
             // 
@@ -104,6 +105,7 @@ namespace Quanlyquanbar
             this.tabDoUong.Controls.Add(this.btnLamMoiDU);
             this.tabDoUong.Controls.Add(this.dgvDoUong);
             this.tabDoUong.Controls.Add(this.lblTongDoUong);
+            this.tabDoUong.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabDoUong.Location = new System.Drawing.Point(4, 22);
             this.tabDoUong.Name = "tabDoUong";
             this.tabDoUong.Size = new System.Drawing.Size(772, 344);
@@ -139,7 +141,7 @@ namespace Quanlyquanbar
             // 
             this.txtTenDU.Location = new System.Drawing.Point(120, 27);
             this.txtTenDU.Name = "txtTenDU";
-            this.txtTenDU.Size = new System.Drawing.Size(100, 20);
+            this.txtTenDU.Size = new System.Drawing.Size(100, 25);
             this.txtTenDU.TabIndex = 3;
             // 
             // cboLoaiDU
@@ -151,14 +153,14 @@ namespace Quanlyquanbar
             "Nước ngọt"});
             this.cboLoaiDU.Location = new System.Drawing.Point(120, 67);
             this.cboLoaiDU.Name = "cboLoaiDU";
-            this.cboLoaiDU.Size = new System.Drawing.Size(121, 21);
+            this.cboLoaiDU.Size = new System.Drawing.Size(121, 25);
             this.cboLoaiDU.TabIndex = 4;
             // 
             // txtGiaDU
             // 
             this.txtGiaDU.Location = new System.Drawing.Point(120, 107);
             this.txtGiaDU.Name = "txtGiaDU";
-            this.txtGiaDU.Size = new System.Drawing.Size(100, 20);
+            this.txtGiaDU.Size = new System.Drawing.Size(100, 25);
             this.txtGiaDU.TabIndex = 5;
             // 
             // btnThemDU
@@ -192,13 +194,15 @@ namespace Quanlyquanbar
             // 
             this.btnLamMoiDU.Location = new System.Drawing.Point(600, 40);
             this.btnLamMoiDU.Name = "btnLamMoiDU";
-            this.btnLamMoiDU.Size = new System.Drawing.Size(75, 23);
+            this.btnLamMoiDU.Size = new System.Drawing.Size(75, 52);
             this.btnLamMoiDU.TabIndex = 9;
             this.btnLamMoiDU.Text = "🔄 Làm mới";
             this.btnLamMoiDU.Click += new System.EventHandler(this.btnLamMoiDU_Click);
             // 
             // dgvDoUong
             // 
+            this.dgvDoUong.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDoUong.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgvDoUong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDoUong.Location = new System.Drawing.Point(10, 160);
             this.dgvDoUong.Name = "dgvDoUong";
@@ -229,6 +233,7 @@ namespace Quanlyquanbar
             this.tabNhanVien.Controls.Add(this.label4);
             this.tabNhanVien.Controls.Add(this.label5);
             this.tabNhanVien.Controls.Add(this.label6);
+            this.tabNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabNhanVien.Location = new System.Drawing.Point(4, 22);
             this.tabNhanVien.Name = "tabNhanVien";
             this.tabNhanVien.Size = new System.Drawing.Size(772, 344);
@@ -238,30 +243,32 @@ namespace Quanlyquanbar
             // 
             // dgvNhanVien
             // 
+            this.dgvNhanVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvNhanVien.Location = new System.Drawing.Point(10, 160);
             this.dgvNhanVien.Name = "dgvNhanVien";
             this.dgvNhanVien.Size = new System.Drawing.Size(750, 160);
             this.dgvNhanVien.TabIndex = 0;
+            this.dgvNhanVien.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNhanVien_CellContentClick);
             // 
             // txtTenNV
             // 
             this.txtTenNV.Location = new System.Drawing.Point(120, 27);
             this.txtTenNV.Name = "txtTenNV";
-            this.txtTenNV.Size = new System.Drawing.Size(100, 20);
+            this.txtTenNV.Size = new System.Drawing.Size(100, 22);
             this.txtTenNV.TabIndex = 1;
             // 
             // txtChucVu
             // 
             this.txtChucVu.Location = new System.Drawing.Point(120, 67);
             this.txtChucVu.Name = "txtChucVu";
-            this.txtChucVu.Size = new System.Drawing.Size(100, 20);
+            this.txtChucVu.Size = new System.Drawing.Size(100, 22);
             this.txtChucVu.TabIndex = 2;
             // 
             // txtLuong
             // 
             this.txtLuong.Location = new System.Drawing.Point(120, 107);
             this.txtLuong.Name = "txtLuong";
-            this.txtLuong.Size = new System.Drawing.Size(100, 20);
+            this.txtLuong.Size = new System.Drawing.Size(100, 22);
             this.txtLuong.TabIndex = 3;
             // 
             // btnThemNV
@@ -295,7 +302,7 @@ namespace Quanlyquanbar
             // 
             this.btnLamMoiNV.Location = new System.Drawing.Point(600, 40);
             this.btnLamMoiNV.Name = "btnLamMoiNV";
-            this.btnLamMoiNV.Size = new System.Drawing.Size(75, 23);
+            this.btnLamMoiNV.Size = new System.Drawing.Size(75, 49);
             this.btnLamMoiNV.TabIndex = 7;
             this.btnLamMoiNV.Text = "🔄 Làm mới";
             this.btnLamMoiNV.Click += new System.EventHandler(this.btnLamMoiNV_Click);
@@ -326,6 +333,7 @@ namespace Quanlyquanbar
             // 
             // tabKhachHang
             // 
+            this.tabKhachHang.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tabKhachHang.Controls.Add(this.dgvKhach);
             this.tabKhachHang.Controls.Add(this.txtTenKH);
             this.tabKhachHang.Controls.Add(this.txtSDT);
@@ -337,19 +345,16 @@ namespace Quanlyquanbar
             this.tabKhachHang.Controls.Add(this.label7);
             this.tabKhachHang.Controls.Add(this.label8);
             this.tabKhachHang.Controls.Add(this.label9);
+            this.tabKhachHang.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabKhachHang.Location = new System.Drawing.Point(4, 22);
             this.tabKhachHang.Name = "tabKhachHang";
             this.tabKhachHang.Size = new System.Drawing.Size(772, 344);
             this.tabKhachHang.TabIndex = 2;
             this.tabKhachHang.Text = "Khách hàng";
             // 
-            this.btnThemKH.Click += new System.EventHandler(this.btnThemKH_Click);
-            this.btnSuaKH.Click += new System.EventHandler(this.btnSuaKH_Click);
-            this.btnXoaKH.Click += new System.EventHandler(this.btnXoaKH_Click);
-            this.btnLamMoiKH.Click += new System.EventHandler(this.btnLamMoiKH_Click);
-
             // dgvKhach
             // 
+            this.dgvKhach.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvKhach.Location = new System.Drawing.Point(10, 160);
             this.dgvKhach.Name = "dgvKhach";
             this.dgvKhach.Size = new System.Drawing.Size(750, 160);
@@ -359,21 +364,21 @@ namespace Quanlyquanbar
             // 
             this.txtTenKH.Location = new System.Drawing.Point(140, 27);
             this.txtTenKH.Name = "txtTenKH";
-            this.txtTenKH.Size = new System.Drawing.Size(100, 20);
+            this.txtTenKH.Size = new System.Drawing.Size(100, 25);
             this.txtTenKH.TabIndex = 1;
             // 
             // txtSDT
             // 
             this.txtSDT.Location = new System.Drawing.Point(140, 67);
             this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(100, 20);
+            this.txtSDT.Size = new System.Drawing.Size(100, 25);
             this.txtSDT.TabIndex = 2;
             // 
             // txtGhiChu
             // 
             this.txtGhiChu.Location = new System.Drawing.Point(140, 107);
             this.txtGhiChu.Name = "txtGhiChu";
-            this.txtGhiChu.Size = new System.Drawing.Size(100, 20);
+            this.txtGhiChu.Size = new System.Drawing.Size(100, 25);
             this.txtGhiChu.TabIndex = 3;
             // 
             // btnThemKH
@@ -383,6 +388,7 @@ namespace Quanlyquanbar
             this.btnThemKH.Size = new System.Drawing.Size(75, 23);
             this.btnThemKH.TabIndex = 4;
             this.btnThemKH.Text = "+ Thêm";
+            this.btnThemKH.Click += new System.EventHandler(this.btnThemKH_Click);
             // 
             // btnSuaKH
             // 
@@ -391,6 +397,7 @@ namespace Quanlyquanbar
             this.btnSuaKH.Size = new System.Drawing.Size(75, 23);
             this.btnSuaKH.TabIndex = 5;
             this.btnSuaKH.Text = "✏️ Sửa";
+            this.btnSuaKH.Click += new System.EventHandler(this.btnSuaKH_Click);
             // 
             // btnXoaKH
             // 
@@ -399,14 +406,16 @@ namespace Quanlyquanbar
             this.btnXoaKH.Size = new System.Drawing.Size(75, 23);
             this.btnXoaKH.TabIndex = 6;
             this.btnXoaKH.Text = "🗑 Xóa";
+            this.btnXoaKH.Click += new System.EventHandler(this.btnXoaKH_Click);
             // 
             // btnLamMoiKH
             // 
             this.btnLamMoiKH.Location = new System.Drawing.Point(600, 40);
             this.btnLamMoiKH.Name = "btnLamMoiKH";
-            this.btnLamMoiKH.Size = new System.Drawing.Size(75, 23);
+            this.btnLamMoiKH.Size = new System.Drawing.Size(75, 52);
             this.btnLamMoiKH.TabIndex = 7;
             this.btnLamMoiKH.Text = "🔄 Làm mới";
+            this.btnLamMoiKH.Click += new System.EventHandler(this.btnLamMoiKH_Click);
             // 
             // label7
             // 
