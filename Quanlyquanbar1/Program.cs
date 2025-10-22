@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quanlyquanbar1;
+using System;
 using System.Windows.Forms;
 
 namespace Quanlyquanbar
